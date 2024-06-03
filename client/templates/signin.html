@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+    <title>VLOGGER CAFÈ</title>
+</head>
+<body>
+    <header></header>
+    <div id="root">
+        <div class="signin-fm card bg-dark">
+            <div class="card-header text-center">
+                <span class="text-light">VLOGGER CAFÈ asks you to sign in</span>
+            </div>
+            <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{form.username}}
+                </div>
+                <div class="mb-3">
+                    {{form.password}}
+                </div>
+                <div class="mb-2">
+                    <input class="form-check-input bg-dark" type="checkbox" id="showpass">
+                    <label class="form-check-label text-light" for="showpass"> Show password</label>
+                </div>
+                <div class="mb-3 d-grid">
+                    <input type="submit" value="Sign In" class="btn btn-primary" name="signup">
+                </div>
+            </form>
+            {% if signin_error %}
+                <div class="mb-3">
+                    <div class="alert alert-danger text-center" role="alert">
+                        Sign in failed: Invalid credentials!
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+            <div class="card-footer text-center">
+                <span class="text-light">If you don't have an account try <a href="/vloggercafe/signup/">Sign Up</a>.Go back to <a href="/vloggercafe">Home</a></span>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #000000;
+}
+header {
+    height: 10vh;
+}
+#root {
+    height: 85vh;
+    display: flex;
+    flex-direction: row;
+}
+.signin-fm {
+    width: 30%;
+    margin: auto;
+}
+footer {
+    height: 5vh;
+}
+@media screen and (max-width: 950px) {
+    .signin-fm {
+        width: 75%;
+    }
+}

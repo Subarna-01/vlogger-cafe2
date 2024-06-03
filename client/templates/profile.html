@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <title>VLOGGER CAFÈ</title>
+</head>
+
+<body>
+    <header>
+        <button id="toggle-sidenav">
+            <img src="{% static 'images/side-menu.ico' %}" alt="side menu">
+        </button>
+        <span class="text-light">VLOGGER CAFÈ</span>
+        <form method="POST" id="logout">
+            {% csrf_token %}
+            <button type="submit" name="logout" class="btn btn-outline-secondary btn-sm">LOGOUT</button>
+        </form>
+    </header>
+    <div class="navbar" tabindex="0">
+        <a href="/vloggercafe" class="navbar-item bg-dark text-center"><span class="display-6">Home</span></a>
+        <a href="/vloggercafe/profile/" class="navbar-item bg-dark text-center"><span
+                class="display-6">Profile</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">Help</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">About</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">Saved</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">Settings</span></a>
+    </div>
+    <div id="root">
+        <div class="sidenav bg-dark" tabindex="0">
+            <div class="sidenav-header">
+                <div class="user-profile-pic">
+                    {% if profile_settings %}
+                    {% for x in profile_settings %}
+                    <img src="{{x.myprofilepic.url}}" alt="User profile pic">
+                    {% endfor %}
+                    {% else %}
+                    <img src="{% static 'images/default-pp.png' %}" alt="User profile pic">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="sidenav-item">
+                <a href="/vloggercafe">
+                    <img class="sidenav-item-img" src="{% static 'images/home.ico' %}" alt="home" data-toggle="tooltip"
+                        data-placement="top" title="Home">
+                    <span class="sidenav-item-span text-light display-6">Home</span>
+                </a>
+            </div>
+            <div class="sidenav-item">
+                <a href="/vloggercafe/profile/">
+                    <img class="sidenav-item-img" src="{% static 'images/profile.ico' %}" alt="Profile"
+                        data-toggle="tooltip" data-placement="top" title="Profile">
+                    <span class="sidenav-item-span text-light display-6">Profile</span>
+                </a>
+            </div>
+            <div class="sidenav-item">
+                <a href="#">
+                    <img class="sidenav-item-img" src="{% static 'images/about.ico' %}" alt="About"
+                        data-toggle="tooltip" data-placement="top" title="About">
+                    <span class="sidenav-item-span text-light display-6">About</span>
+                </a>
+            </div>
+            <div class="sidenav-item">
+                <a href="#">
+                    <img class="sidenav-item-img" src="{% static 'images/saved.ico' %}" alt="Saved"
+                        data-toggle="tooltip" data-placement="top" title="Saved">
+                    <span class="sidenav-item-span text-light display-6">Saved</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content bg-dark">
+            <div class="main-content-header">
+                <span class="text-light display-6">Welcome,{{session_info.username}}</span>
+                <button id="delete-account" class="btn btn-outline-danger btn-sm">Delete my account</button>
+            </div>
+            <div class="main-content-body" tabindex="0">
+                <span class="text-light" style="margin: 0.5% 2%;width:96%">My profile settings</span>
+                <div class="my-profile-settings card bg-dark">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="myprofilepic" class="text-muted mb-2">Update your profile picture</label>
+                                {{fm2.myprofilepic}}
+                            </div>
+                            <div class="mb-3">
+                                <input type="submit" name="edit" value="Edit &#9998;" class="btn btn-outline-secondary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <span class="text-light" style="margin: 0.5% 2%;width:96%">Publish a new video</span>
+                <div class="file-upload-fm card bg-dark">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="mb-3">
+                                {{form.video_title}}
+                            </div>
+                            <div class="mb-3">
+                                {{form.video_hashtags}}
+                            </div>
+                            <div class="mb-3">
+                                {{form.video_desc}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="videothumbnail" class="text-muted mb-2">Upload your video file</label>
+                                {{form.video_filename}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="videothumbnail" class="text-muted mb-2">Add a thumbnail</label>
+                                {{form.video_thumbnail}}
+                            </div>
+                            <div class="mb-3">
+                                <input type="submit" value="&#8593; Upload" name="upload"
+                                    class="btn btn-outline-secondary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <span class="text-light" style="margin: 0.5% 2%;width:96%">Uploaded videos</span>
+                <div class="uploaded-media bg-dark">
+                    {% for videos in video_record %}
+                    <div class="latest-upload">
+                        <video controls poster="{{videos.video_thumbnail.url}}">
+                            <source src="{{videos.video_filename.url}}" type="video/mp4">
+                        </video>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        {% if location.city %}
+        <span class="text-muted">&#8226; Location - {{location.city}},{{location.countryCode}}</span>
+        <span class="text-primary" style="font-size: 12px;">Made by Subarna Bhowmik</span>
+        {% else %}
+        <span class="text-muted">&#8226; Unable to find your location</span>
+        <span class="text-primary" style="font-size: 12px;">Made by Subarna Bhowmik</span>
+        {% endif %}
+    </footer>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+    <title>VLOGGER CAFÈ</title>
+</head>
+
+<body>
+    <header>
+        <button id="toggle-sidenav">
+            <img src="{% static 'images/side-menu.ico' %}" alt="Side Menu">
+        </button>
+        <span class="text-light">VLOGGER CAFÈ</span>
+        {% if not session.user_id %}
+        <span id="signin-up">
+            <a href="/vloggercafe/signin/">Sign In</a> or <a href="/vloggercafe/signup/">Sign Up</a>
+        </span>
+        {% endif %}
+    </header>
+    <div class="navbar" tabindex="0">
+        <a href="/vloggercafe" class="navbar-item bg-dark text-center"><span class="display-6">Home</span></a>
+        <a href="/vloggercafe/profile/" class="navbar-item bg-dark text-center"><span
+                class="display-6">Profile</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">Help</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">About</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">Saved</span></a>
+        <a class="navbar-item bg-dark text-center"><span class="display-6">Settings</span></a>
+    </div>
+    <div id="root">
+        <div class="sidenav bg-dark" tabindex="0">
+            <div class="sidenav-header">
+                <div class="user-profile-pic">
+                    {% if profile_settings %}
+                    {% for x in profile_settings %}
+                    <img src="{{x.myprofilepic.url}}" alt="User profile pic">
+                    {% endfor %}
+                    {% else %}
+                    <img src="{% static 'images/default-pp.png' %}" alt="User profile pic">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="sidenav-item">
+                <a href="/vloggercafe">
+                    <img class="sidenav-item-img" src="{% static 'images/home.ico' %}" alt="Home" data-toggle="tooltip"
+                        data-placement="top" title="Home">
+                    <span class="sidenav-item-span text-light display-6">Home</span>
+                </a>
+            </div>
+            <div class="sidenav-item">
+                <a href="/vloggercafe/profile/">
+                    <img class="sidenav-item-img" src="{% static 'images/profile.ico' %}" alt="Profile"
+                        data-toggle="tooltip" data-placement="top" title="Profile">
+                    <span class="sidenav-item-span text-light display-6">Profile</span>
+                </a>
+            </div>
+            <div class="sidenav-item">
+                <a href="#">
+                    <img class="sidenav-item-img" src="{% static 'images/about.ico' %}" alt="About"
+                        data-toggle="tooltip" data-placement="top" title="About">
+                    <span class="sidenav-item-span text-light display-6">About</span>
+                </a>
+            </div>
+            <div class="sidenav-item">
+                <a href="#">
+                    <img class="sidenav-item-img" src="{% static 'images/saved.ico' %}" alt="Saved"
+                        data-toggle="tooltip" data-placement="top" title="Saved">
+                    <span class="sidenav-item-span text-light display-6">Saved</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content bg-dark">
+            <div class="main-content-header">
+                <span id="filter-results">
+                    <img src="{% static 'images/filter.ico' %}" alt="Filter results" class="dropdown-toggle"
+                        type="button" id="filter-results-btn" data-bs-toggle="dropdown" aria-expanded="false"
+                        height="80%" width="80%" data-toggle="tooltip" data-placement="top" title="Filter Results"
+                        style="margin: auto;cursor: pointer;">
+                </span>
+                <form method="POST" name="search-form">
+                    {% csrf_token %}
+                    <div id="searchbar" class="bg-dark">
+                        {{form.search_query}}
+                        <div id="search-btn" class="bg-dark">
+                            <input type="image" src="{% static 'images/search.ico' %}" alt="Search" name="search-btn"
+                                id="search-icon">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="main-content-body" tabindex="0">
+                <div class="video-content-wrapper card bg-dark">
+                    <div class="card-body video-content row" tabindex="0">
+                        {% if video_records %}
+                        {% for video in video_records %}
+                        <div class="vlog col-4">
+                            <video class="clip" loop muted="muted" preload="none"
+                                poster="{{video.video_thumbnail.url}}">
+                                <source src="{{video.video_filename.url}}" type="video/mp4">
+                            </video>
+                            <div class="text-light">&#8226; {{video.video_title}}</div>
+                            <div style="font-size: 75%;display: flex;"><span class="text-light"
+                                    style="margin: auto;margin-left: 3%">{{video.username}}</span> <span
+                                    class="text-muted"
+                                    style="margin: auto;margin-right: 0.5%">{{video.published_date}}</span></div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="text-light col-12" style="display: flex;"><span
+                                style="margin: auto;font-size: 120%;">No results found.</span></div>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <hr class="border border-1 bg-light">
+                {% if location.city %}
+                <span class="text-light" style="margin: 0.5% 1.5%;width:96%;font-size: 110%">Popular vlogs from
+                    {{location.city}}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <footer>
+        {% if location.city %}
+        <span class="text-muted">&#8226; Location - {{location.city}},{{location.countryCode}}</span>
+        <span class="text-primary" style="font-size: 12px;">Made by Subarna Bhowmik</span>
+        {% else %}
+        <span class="text-muted">&#8226; Unable to find your location</span>
+        <span class="text-primary" style="font-size: 12px;">Made by Subarna Bhowmik</span>
+        {% endif %}
+    </footer>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+</body>
+
+</html>

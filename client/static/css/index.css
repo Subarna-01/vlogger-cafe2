@@ -1,0 +1,337 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --sidenav-width: 20%;
+    --main-content-width: calc(100% - var(--sidenav-width));
+}
+body {
+    background-color: #000000;
+}
+header {
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+}
+#toggle-sidenav {
+    height: 28px;
+    width: 28px;
+    margin: auto 0.5%;
+    border: none;
+}
+#toggle-sidenav img {
+    height: 100%;
+    width: 100%;
+}
+header span {
+    margin: auto 0.5%;
+    font-size: 110%;
+}
+#signin-up {
+    margin: auto;
+    margin-right: 0.5%;
+    color: #6c757d;
+    font-size: 90%;
+}
+#signin-up a {
+    text-decoration: none;
+    color: #6c757d;
+}
+#signin-up a:hover {
+    color: #3d3d3f;
+}
+.navbar {
+    height: 7vh;
+    width: 99%;
+    margin: 0 0.5%;
+    display: none;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    border-top: 1px solid #6c757d;
+    border-bottom: 1px solid #6c757d;
+}
+.navbar-item {
+    display: inline-block;
+    height: 28px;
+    width: 80px;
+    margin: auto 0.5%;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fbfbfb;
+}
+.navbar-item :hover {
+    color: #fbfbfb;
+}
+.navbar-item span {
+    margin: auto;
+    font-size: 90%;
+}
+#root {
+    height: 85vh;
+    display: flex;
+    flex-direction: row;
+}
+.sidenav {
+    height: 98%;
+    width: var(--sidenav-width);
+    margin: auto 0.5%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+.sidenav-collapse {
+    width: calc(var(--sidenav-width)/2);
+}
+.sidenav-header {
+    height: 80px;
+    width: 94%;
+    margin: 3% 3%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+.user-profile-pic {
+    height: 65px;
+    width: 65px;
+    margin: auto;
+    border-radius: 35px;
+}
+.user-profile-pic-resize {
+    height: 45px;
+    width: 45px;
+    border-radius: 17.5px;
+}
+.user-profile-pic img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+}
+.sidenav-header-resize {
+    height: 80px;
+    width: 94%;
+    margin: 3% 3%;
+    border-radius: 5px;
+}
+.sidenav-item {
+    height: 50px;
+    width: 94%;
+    margin: 3% 3%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+}
+.sidenav-item-resize {
+    height: 50px;
+    width: 94%;
+    margin: 3% 3%;
+    border-radius: 5px;
+}
+.sidenav-item:hover {
+    background-color: #3d3d3f;
+}
+.sidenav-item a {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: #000000;
+}
+.sidenav-item-img {
+    height: 28px;
+    width: 28px;
+    margin: auto;
+    margin-left: 10%;
+    margin-right: 5%;
+}
+.sidenav-item-img-expand {
+    margin: auto;
+}
+.sidenav-item-span {
+    margin: auto;
+    margin-left: 5%;
+    font-size: 95%;
+}
+.sidenav-item-span-collapse {
+    display: none;
+}
+.main-content {
+    height: 98%;
+    width: var(--main-content-width);
+    margin: auto 0.5%;
+    border-radius: 10px;
+}
+.main-content-exp {
+    width: calc(var(--main-content-width) + calc(var(--sidenav-width)/2));
+}
+.main-content-header {
+    height: 10%;
+    width: 99%;
+    margin: 0.5%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #6c757d;
+}
+#filter-results {
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    margin-left: 0.5%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+#filter-results:hover {
+    background-color: #3d3d3f;
+}
+form {
+    margin: auto;
+    margin-left: 1%;
+}
+#searchbar {
+    height: 38px;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    border: 1px solid #6c757d;
+}
+#search {
+    height: 30px;
+    width: 295px;
+    margin: auto;
+    border: 0px none;
+    outline: none;
+}
+#search-btn {
+    height: 30px;
+    width: 45px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border-left: 1px solid #6c757d;
+}
+#search-icon {
+    height: 22.5px;
+    width: 22.5px;
+    margin: auto;
+    /* transition: 700ms linear; */
+}
+/* #search-icon:hover {
+    transform: rotate(360deg);
+    cursor: pointer;
+} */
+.main-content-body {
+    height: 87%;
+    width: 99%;
+    margin: 1% 0.5%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.video-content-wrapper {
+    height: 55%;
+    width: 99%;
+    margin: 0.5%;
+    border: none;
+}
+.video-content {
+    overflow-y: scroll;
+}
+.vlog {
+    height: 100%;
+    margin-bottom: 1.5%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+.vlog div {
+    width: 97%;
+    margin: auto 1.5%;
+}
+.vlog video {
+    height: 70%;
+    width: 97%;
+    object-fit: cover;
+    margin: auto 1.5%;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.vlog:hover {
+    background-color: #3d3d3f; 
+}
+footer {
+    height: 6vh;
+    display: flex;
+    flex-direction: column;
+}
+footer span {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+@media screen and (max-width: 1300px) {
+    .sidenav {
+        width: calc(var(--sidenav-width)/2);
+    }
+    .sidenav-header {
+        height: 80px;
+        width: 94%;
+        margin: 3% 3%;
+        border-radius: 5px;
+    }
+    .user-profile-pic {
+        height: 35px;
+        width: 35px;
+        border-radius: 17.5px;
+    }
+    .sidenav-item {
+        height: 50px;
+        width: 94%;
+        margin: 3% 3%;
+        border-radius: 5px;
+    }
+    .sidenav-item-img {
+        margin: auto;
+    }
+    .sidenav-item-span {
+        display: none;
+    }
+    .main-content {
+        width: calc(var(--main-content-width) + calc(var(--sidenav-width)/2));
+    }
+}
+@media screen and (max-width: 950px) {
+    header span {
+        margin: auto;
+        font-size: 100%;
+    }
+    .navbar {
+        display: block;
+    }
+    .sidenav,#toggle-sidenav,#filter-results,#signin-up {
+        display: none;
+    }
+    .main-content {
+        width: 99%;
+    }
+    form {
+        margin: auto;
+    }
+    #searchbar {
+        height: 35px;
+        width: 300px;
+    }
+    #search {
+        height: 25px;
+        width: 75%;
+    }
+    #search-btn {
+        height: 25px;
+        width: 15%;
+    }
+    
+}

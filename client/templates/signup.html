@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <title>VLOGGER CAFÈ</title>
+</head>
+<body>
+    <header></header>
+    <div id="root">
+        <div class="signup-fm card bg-dark">
+            <div class="card-header text-center">
+                <span class="text-light">Hey! welcome to VLOGGER CAFÈ</span>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="mb-3">
+                        {{form.username}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.email}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.password}}
+                    </div>
+                    <div class="mb-2">
+                        <input class="form-check-input bg-dark" type="checkbox" id="showpass">
+                        <label class="form-check-label text-light" for="showpass"> Show password</label>
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <input type="submit" value="Sign Up" class="btn btn-primary" name="signup">
+                    </div>
+                </div>
+            </form>
+            <div class="card-footer text-center">
+                <span class="text-light">If you already an account try <a href="/vloggercafe/signin/">Sign In</a>.Go back to <a href="/vloggercafe">Home</a></span>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
